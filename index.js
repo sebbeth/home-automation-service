@@ -1,8 +1,7 @@
 const express = require("express");
 const http = require("http");
-const moment = require("moment");
+const moment = require("moment-timezone");
 const port = process.env.PORT || 5000
-moment.locale("au")
 const app = express();
 
 app.post("/", (req, res) => {
@@ -26,7 +25,7 @@ app.post("/joined-home-network", (req, res) => {
   request.end();
   res.sendStatus(200);
 });
-
-console.log(`Current time ${moment().format()}`);
+const now = moment.tz("Australia/Sydney");
+console.log(`Current time ${now.format()}`);
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));
